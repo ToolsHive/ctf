@@ -1,0 +1,70 @@
+name: Node.js Package Test 🎉
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [21.x]
+
+    steps:
+      # Step 1: Checkout the repository code into the workflow runner.
+      - name: 📁 Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js with the required version and enable npm caching for faster installs.
+      - name: 📦 Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      # Step 3: Install project dependencies from the package.json file.
+      - name: 📦 Install dependencies
+        run: npm install
+
+      # Step 4: Build the project.
+      - name: 🚀 Build the project
+        run: npm run build
+
+      # Step 5: Test if the main entry file (dist/index.js) runs without errors.
+      - name: 🏗️ Ensure main entry (dist/index.js) runs without errors
+        id: main_entry
+        run: |
+          node dist/index.js
+
+      # Step 6: Test if the module entry file (dist/index.mjs) runs without errors.
+      - name: 🏗️ Ensure module entry (dist/index.mjs) runs without errors
+        id: module_entry
+        run: |
+          node --experimental-modules dist/index.mjs
+
+      # Step 7: Check for outdated dependencies in the project.
+      - name: 🔄 Check for outdated dependencies
+        id: outdated_deps
+        run: |
+          npm outdated > outdated.txt || true
+        continue-on-error: true
+
+      # Step 8: Display the results of outdated dependencies in the project
+      - name: 📣 Display  outdated dependencies results
+        run: cat outdated.txt
+        continue-on-error: true
+
+      # Step 9: Run the npm audit command to check for security vulnerabilities in production dependencies.
+      - name: 🔒 Check for security risks
+        id: audit
+        run: npm audit --production --json > audit-result.json
+        continue-on-error: true
+
+      # Step 10: Display the results of the npm audit for security vulnerabilities.
+      - name: 📣 Display audit results
+        run: cat audit-result.json
+        continue-on-error: true

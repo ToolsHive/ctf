@@ -16,6 +16,7 @@
     "lint:fix": "eslint --fix src/**/*.ts",
     "format:fix": "prettier --write 'src/**/*'",
     "commit": "cz",
+    "release": "semantic-release",
     "prepare": "husky"
   },
   "keywords": [

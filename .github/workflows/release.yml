@@ -1,0 +1,55 @@
+name: Release
+
+# Trigger the workflow manually
+on:
+  workflow_dispatch: # Manually triggered
+
+jobs:
+  release:
+    permissions:
+      content: write
+      issues: write
+      pull-requests: write
+      packages: write 
+      
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js with the required version and enable npm caching for faster installs.
+      - name: 📦 Use Node.js 20.8.1
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.8.1'
+          cache: "npm"
+
+      # Step 3: Install project dependencies from the package.json file.
+      - name: 📦 Install dependencies
+        run: npm install
+
+      # Step 4: Run formatting to ensure code is properly formatted
+      - name: 💅 Run format
+        run: npm run format:fix
+
+      # Step 5: Run linting to ensure code quality
+      - name: 💅 Run lint
+        run: npm run lint:fix
+
+      # Step 6: Build the project to generate the dist directory
+      - name: 🏗️ Build the project
+        run: npm run build
+
+      # Step 7: Run Semantic Release to determine the new version and handle versioning and publishing
+      - name: 🎉 Run Semantic Release
+        id: semantic_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        run: npm run release
+
+      # Step 8: Clean up old build artifacts
+      - name: 🧹 Clean up old build artifacts
+        run: rm -rf dist/
