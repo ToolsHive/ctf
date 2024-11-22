@@ -9,7 +9,8 @@
     "ctf": "./dist/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup",
+    "start": "node dist/index.js"
   },
   "keywords": [
     "CTF",
@@ -21,6 +22,11 @@
     "CLI",
     "Tool"
   ],
+  "devDependencies": {
+    "@types/node": "^22.9.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  },
   "author": "Armoghan-ul-Mohmin",
   "license": "MIT",
   "repository": {
