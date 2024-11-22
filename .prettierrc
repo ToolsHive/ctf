@@ -1,0 +1,18 @@
+{
+    "overrides": [
+        {
+            "files": "*.ts",
+            "options": {
+                "semi": true,
+                "singleQuote": true,
+                "printWidth": 80,
+                "trailingComma": "es5",
+                "tabWidth": 2,
+                "useTabs": false,
+                "bracketSpacing": true,
+                "arrowParens": "always",
+                "parser": "typescript"
+            }
+        }
+    ]
+}
