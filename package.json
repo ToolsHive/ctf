@@ -1,0 +1,34 @@
+{
+  "name": "ctf",
+  "version": "1.0.0",
+  "description": "A command-line shell utility for setting up and managing Capture",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "ctf": "./dist/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CTF",
+    "Capture The Flag",
+    "Security",
+    "Hacking",
+    "Challenges",
+    "Utility",
+    "CLI",
+    "Tool"
+  ],
+  "author": "Armoghan-ul-Mohmin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToolsHive/ctf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ToolsHive/ctf/issues"
+  },
+  "homepage": "https://github.com/ToolsHive/ctf#readme"
+}
