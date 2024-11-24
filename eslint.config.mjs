@@ -18,7 +18,10 @@ export default [
         },
         rules: {
             "@typescript-eslint/no-unused-vars": ["warn"],
-            "@typescript-eslint/explicit-function-return-type": ["warn"],
+            '@typescript-eslint/explicit-function-return-type': ['warn', { 
+                allowExpressions: true, 
+                allowTypedFunctionExpressions: true 
+            }],
             "@typescript-eslint/no-explicit-any": "warn",
             "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
             "prettier/prettier": "warn",

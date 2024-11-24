@@ -12,7 +12,7 @@
     "build": "tsup",
     "start": "node dist/index.js",
     "lint": "eslint src/**/*.ts",
-    "format": "prettier 'src/**/*'",
+    "format": "prettier 'src/**/*.ts'",
     "lint:fix": "eslint --fix src/**/*.ts",
     "format:fix": "prettier --write 'src/**/*'",
     "commit": "cz",
@@ -38,13 +38,19 @@
   },
   "lint-staged": {
     "*.ts": [
-      "npm run lint"
+      "npm run lint:fix"
     ]
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@types/inquirer": "^9.0.7",
+    "chalk": "^5.0.0",
+    "commander": "^12.1.0",
+    "inquirer": "^12.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
